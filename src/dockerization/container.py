@@ -55,10 +55,8 @@ class ContainerCrud:
                 publish_all_ports=True,
             )
 
-            # Сразу же запускаем контейнер и добавляем в список новых созданных контейнеров
+            # Сразу же запускаем контейнер
             container.start()
-            self.container_list.append(container)
-            self.container_list.append(Settings.SERVER_CONTAINER_NAME)
             return container.name
 
         except Exception as exc:
@@ -76,22 +74,6 @@ class ContainerCrud:
         try:
             container = client.containers.get(name)
             container.stop()
-        except Exception as exc:
-            return f"Ошибка: {exc} Не удалось остановить контейнер"
-
-    def remove_all_containers(self) -> list[str]:
-        """Отвечает за остановку всех контенеров Docker,
-        т.к при создании контейнеров установлен флаг
-        auto_remove = True, это приводит к удалению
-        контейнеров
-
-        Returns:
-            list[str]: Список контейнеров
-        """
-        try:
-            for container in self.container_list:
-                container.stop()
-            return self.container_list
         except Exception as exc:
             return f"Ошибка: {exc} Не удалось остановить контейнер"
 
