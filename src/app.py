@@ -17,7 +17,7 @@ app = FastAPI(exception_handlers=exception_handlers)
 app.mount(
     "/static",
     StaticFiles(
-        directory=pathlib.Path(__file__).parent.parent.absolute() / "./backend/static"
+        directory=pathlib.Path(__file__).parent.parent.absolute() / "./src/static"
     ),
     name="static",
 )
