@@ -23,7 +23,3 @@ app.mount(
 )
 
 app.include_router(router)
-
-@app.on_event("shutdown")
-def stop_containers():
-    crud.remove_all_containers() 

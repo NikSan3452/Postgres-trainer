@@ -1,7 +1,4 @@
 version: '3.8'
-networks:
-  postgres-trainer:
-    external: true
 services:
   server: 
     build:
@@ -13,27 +10,23 @@ services:
     command: python ./main.py
     restart: always
     tty: true
-    env_file:
-      - ./src/.env
     networks:
-      - postgres-trainer
+      - default
     ports:
       - 8000:8000
     depends_on:
       - db
+    container_name: fastapi-server
   db:
     build:
       context: ./src
       dockerfile: db.Dockerfile
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - ./src/.env
-    networks:
-      - postgres-trainer
     ports:
       - 5432:5432
     restart: always
+    container_name: postgres-db
 volumes:
   postgres_data: #
   

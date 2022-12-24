@@ -58,6 +58,7 @@ class ContainerCrud:
             # Сразу же запускаем контейнер и добавляем в список новых созданных контейнеров
             container.start()
             self.container_list.append(container)
+            self.container_list.append(Settings.SERVER_CONTAINER_NAME)
             return container.name
 
         except Exception as exc:

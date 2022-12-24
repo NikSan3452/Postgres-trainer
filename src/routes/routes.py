@@ -147,7 +147,7 @@ def create(request: Request) -> Optional[JSONResponse]:
                 expires=Settings.COOKIE_EXPIRATION,
                 httponly=True,
                 samesite="lax",
-            )
+            ) 
             return response
         except Exception as exc:
             return f"{exc} Неудалось создать базу данных"
