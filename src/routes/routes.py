@@ -1,3 +1,4 @@
+import time
 from typing import Optional
 from fastapi import status, APIRouter
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -134,12 +135,15 @@ def create(request: Request) -> Optional[JSONResponse]:
                 content="Новая база данных успешно создана",
                 status_code=status.HTTP_200_OK,
             )
-
+        
             # Создаем контейнер и получем его имя
             container_name = crud.create_container()
-            # Кодируем имя контейнера
+            # Кодируем имя контейнера + url БД
             encoded_container = crud.encode_token(obj=container_name)
 
+            # Ждем пока создается база данных
+            time.sleep(5)
+            
             # Устанавливаем cookie с токеном клиенту
             response.set_cookie(
                 key="trainer",
@@ -147,7 +151,7 @@ def create(request: Request) -> Optional[JSONResponse]:
                 expires=Settings.COOKIE_EXPIRATION,
                 httponly=True,
                 samesite="lax",
-            ) 
+            )
             return response
         except Exception as exc:
             return f"{exc} Неудалось создать базу данных"

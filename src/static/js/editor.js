@@ -39,8 +39,8 @@ function submit_run(value) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ data: value }),
-    })
-        .then((resp) => resp.text()) // or, resp.json(), etc.
+    })  
+        .then((resp) => resp.text()) 
         .then((data) => {
             document.getElementById("responseArea").innerHTML = data;
         })
@@ -48,6 +48,7 @@ function submit_run(value) {
             console.error(error);
         });
 }
+
 
 function submit_new_database() {
     fetch("/new-database", {
@@ -57,8 +58,8 @@ function submit_new_database() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ data: 'create' }),
-    })
-        .then((resp) => resp.text()) // or, resp.json(), etc.
+    })  
+        .then((resp) => resp.text())
         .then((data) => {
             document.getElementById("responseArea").innerHTML = data;
         })
@@ -77,7 +78,7 @@ function submit_delete() {
         },
         body: JSON.stringify({ data: 'delete' }),
     })
-        .then((resp) => resp.text()) // or, resp.json(), etc.
+        .then((resp) => resp.text())
         .then((data) => {
             document.getElementById("responseArea").innerHTML = data;
         })
