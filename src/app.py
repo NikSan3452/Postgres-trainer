@@ -1,0 +1,29 @@
+import pathlib
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+import exceptions as exc
+
+from routes.routes import router
+from dockerization.container import crud
+
+exception_handlers = {
+    404: exc.not_found_error,
+    500: exc.internal_error,
+}
+
+
+app = FastAPI(exception_handlers=exception_handlers)
+
+app.mount(
+    "/static",
+    StaticFiles(
+        directory=pathlib.Path(__file__).parent.parent.absolute() / "./backend/static"
+    ),
+    name="static",
+)
+
+app.include_router(router)
+
+@app.on_event("shutdown")
+def stop_containers():
+    crud.remove_all_containers() 

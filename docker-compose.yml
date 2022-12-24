@@ -1,0 +1,39 @@
+version: '3.8'
+networks:
+  postgres-trainer:
+    external: true
+services:
+  server: 
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/:/src/
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: python ./main.py
+    restart: always
+    tty: true
+    env_file:
+      - ./src/.env
+    networks:
+      - postgres-trainer
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    build:
+      context: ./src
+      dockerfile: db.Dockerfile
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./src/.env
+    networks:
+      - postgres-trainer
+    ports:
+      - 5432:5432
+    restart: always
+volumes:
+  postgres_data: #
+  

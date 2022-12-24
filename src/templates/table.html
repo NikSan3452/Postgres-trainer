@@ -1,0 +1,21 @@
+<div class="" id="responseArea">
+    {% if error %}
+    <p class="errors">{{ error }}</p>
+    {% elif msg == 'Выполнено'%}
+    <p class="msg">{{ msg }}</p>
+    {% else %}
+    <table>
+        <tr>
+            {% for item in model_headers %}
+            <th>{{ item }}</th>
+            {% endfor %}
+        </tr>
+        {% for all_rows in query_results %}
+        <tr>
+            {% for every_column in all_rows %}
+            <td>{{ every_column }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %} {% endif %}
+    </table>
+</div>

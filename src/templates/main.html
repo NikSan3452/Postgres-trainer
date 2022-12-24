@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', path='css/styles.css')}}"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&&display=swap"
+            rel="stylesheet"
+        />
+        <title>Postgres-Trainer</title>
+    </head>
+    <body>
+        <div class="container">
+            <main class="main">
+                <section class="sql-schemas">
+                    <iframe
+                        width="100%"
+                        height="500px"
+                        style="
+                            box-shadow: 0 2px 8px 0 rgba(63, 69, 81, 0.16);
+                            border-radius: 15px;
+                        "
+                        allowtransparency="true"
+                        allowfullscreen="true"
+                        scrolling="no"
+                        title="Embedded DrawSQL IFrame"
+                        frameborder="0"
+                        src="https://drawsql.app/teams/satrial/diagrams/nordwind/embed"
+                    ></iframe>
+                </section>
+                <section class="sql-trainer">
+                    <div class="sql-tables">
+                        <div class="scroll-wrapper">
+                            {% include "table.html" %}
+                        </div>
+                    </div>
+                    <div class="sql-editor">
+                        <div class="editor">
+                            <div class="" id="editor"></div>
+                        </div>
+                        <div class="editor-buttons">
+                            <button
+                                class="new-database"
+                                onclick="submit_new_database()"
+                            >
+                                New database
+                            </button>
+                            <button type="submit" class="run-button">
+                                Run
+                            </button>
+                            <button
+                                type="submit"
+                                class="delete-button"
+                                onclick="submit_delete()"
+                            >
+                                delete
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <script src="{{url_for('static', path='/js/ace_editor/src-min/ace.js')}}"></script>
+        <script src="{{url_for('static', path='/js/ace_editor/src-min/mode-pgsql.js')}}"></script>
+        <script src="{{url_for('static', path='/js/ace_editor/src-min/ext-language_tools.js')}}"></script>
+
+        <script src="{{url_for('static', path='/js/editor.js')}}"></script>
+    </body>
+</html>

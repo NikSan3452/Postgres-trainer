@@ -1,0 +1,166 @@
+body {
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: rgb(146, 171, 207);
+    background-color: rgb(15, 23, 36);
+}
+
+.errors {
+    color: rgb(255, 86, 86);
+}
+
+.msg {
+    color: rgb(68, 139, 68);
+}
+
+table, th, td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid aquamarine;
+    border-collapse: collapse;
+}
+
+th {
+    
+    color: rgb(158, 219, 96);
+}
+
+tr {
+    max-height: 20px;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sql-schemas {
+    height: 95vh;
+    width: 50%;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0px 5px 5px rgb(146, 171, 207);
+    margin: 10px;
+    border-radius: 15px;
+}
+
+iframe {
+    height: 100%;
+}
+
+.sql-trainer {
+    height: 95vh;
+    width: 50%;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px 5px rgb(146, 171, 207);
+    margin: 10px;
+    border-radius: 15px;
+}
+
+
+.sql-tables {
+    width: 98%;
+    height: 50vh;
+    margin: 5px 5px 0px 5px;
+    border: 1px solid rgb(146, 171, 207);
+    border-radius: 5px;
+}
+
+.scroll-wrapper {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #464669;
+    border-radius: 10px;
+  }
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00c6fb, rgb(0, 34, 64));
+  }
+
+.sql-editor {
+    width: 98%;
+    height: 45vh;
+    margin: 5px;
+    border: 1px solid rgb(146, 171, 207);
+    border-radius: 5px;
+}
+
+.editor {
+    height: 85%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#editor {
+    width: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.editor-buttons {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+    
+}
+
+.run-button, .delete-button, .new-database {
+    width: 50%;
+    border: 1px solid rgb(146, 171, 207);
+    border-radius: 10px;
+    margin: 10px;
+    font-weight: 700;
+}
+
+.run-button {
+    background-color: rgb(113, 233, 113);
+}
+
+.run-button:hover {
+    background-color: rgb(0, 201, 0);
+}
+
+.delete-button {
+    background-color: rgb(247, 108, 108);
+}
+
+.delete-button:hover {
+    background-color: rgb(253, 57, 57);
+}
+
+.new-database {
+    background-color: rgb(138, 138, 255);
+}
+
+.new-database:hover {
+    background-color: rgb(74, 74, 252);
+}
+
+#responseArea {
+    padding: 10px;
+    height: 100%;
+}
