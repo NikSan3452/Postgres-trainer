@@ -14,14 +14,14 @@ router = APIRouter()
 
 
 @router.get("/", response_class=HTMLResponse)
-async def main(request: Request):
+async def main(request: Request) -> HTMLResponse:
     """Отвечает за отображение главной страницы
 
     Args:
         request (Request): Тело запроса
 
     Returns:
-        _type_: HTML - ответ
+        HTMLResponse: HTML - ответ
     """
     return tmp.TemplateResponse("main.html", context={"request": request})
 
@@ -120,7 +120,7 @@ def create(request: Request) -> Optional[JSONResponse]:
         request (Request): Тело запроса
 
     Raises:
-        exc.DockerException: Сработает если по каким-то причинам
+        Exception: Сработает если по каким-то причинам
         не удалось создать новый контейнер
 
     Returns:
@@ -174,7 +174,7 @@ def delete(request: Request) -> Optional[JSONResponse]:
         request (Request): Тело запроса
 
     Raises:
-        exc.DockerException: Сработает если база данных не была создана
+        Exception: Сработает если база данных не была создана
 
     Returns:
         Optional[JSONResponse]: JSON - ответ
