@@ -13,6 +13,3 @@ services:
 volumes:
   postgres_data: #
 
-# docker-compose -f docker-compose.yml build
-# docker-compose -f docker-compose.db.yml build
-# docker-compose -f docker-compose.yml up

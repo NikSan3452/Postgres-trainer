@@ -17,7 +17,6 @@ class ContainerCrud:
 
     def __init__(self) -> None:
         self.container_name: str = None
-        self.container_list: list[str] = []
         self.container_port: int = None
         self.container_port_list: list[int] = []
 
@@ -76,6 +75,13 @@ class ContainerCrud:
             container.stop()
         except Exception as exc:
             return f"Ошибка: {exc} Не удалось остановить контейнер"
+    
+    def remove_all_containers(self):
+        try:
+            for container in client.containers.list():
+                container.remove()
+        except Exception as exc:
+            return f"Ошибка: {exc} Не удалось остановить контейнер"
 
     def create_container_name(self) -> str:
         """Отвечает за генерацию уникальных имен контейнеров Docker
@@ -106,7 +112,7 @@ class ContainerCrud:
             str: URL для подключения к БД
         """
         self.postgres_user = "".join(
-            secrets.choice(string.ascii_letters) for i in range(8)
+            secrets.choice(string.ascii_letters) for _ in range(8)
         )
         self.postgres_password = "".join(
             secrets.choice(string.ascii_letters + string.digits) for i in range(12)
@@ -114,7 +120,7 @@ class ContainerCrud:
         self.postgres_server = self.container_name
         self.postgres_port = 5432
         self.postgres_db = "".join(
-            secrets.choice(string.ascii_letters) for i in range(12)
+            secrets.choice(string.ascii_letters) for _ in range(12)
         )
         self.database_url = f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}@{self.postgres_server}:{self.postgres_port}/{self.postgres_db}"
         return self.database_url

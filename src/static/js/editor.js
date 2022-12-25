@@ -1,3 +1,4 @@
+// Ace редактор
 let executeCodeBtn = document.querySelector(".run-button");
 
 let codeEditor = ace.edit("editor");
@@ -31,6 +32,8 @@ executeCodeBtn.addEventListener("click", () => {
 
 editorLib.init();
 
+
+// Выполнить sql - запрос
 function submit_run(value) {
     fetch("/run", {
         method: "POST",
@@ -50,6 +53,7 @@ function submit_run(value) {
 }
 
 
+// Создать новую базу данных
 function submit_new_database() {
     fetch("/new-database", {
         method: "POST",
@@ -69,6 +73,7 @@ function submit_new_database() {
 }
 
 
+// Удалить базу данных
 function submit_delete() {
     fetch("/delete", {
         method: "POST",
@@ -88,6 +93,7 @@ function submit_delete() {
 }
 
 
+// Анимация кнопки создания БД 
 document.querySelector('button').addEventListener('click', function (event) {
     var classes = event.target.classList;
     var text = event.target.textContent;

@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from exceptions import exceptions as exc
 
 from routes.routes import router
+from dockerization.container import crud
 
 exception_handlers = {
     404: exc.not_found_error,
@@ -23,3 +24,7 @@ app.mount(
 
 app.include_router(router)
 
+
+@app.on_event('shutdown')
+def stop():
+    crud.remove_all_containers()
