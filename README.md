@@ -19,23 +19,23 @@
 
 После установки Docker клонируйте репозиторий в удобную для вас деректорию:
 
-git clone https://github.com/NikSan3452/Postgres-trainer.git
+```git clone https://github.com/NikSan3452/Postgres-trainer.git```
 
 Перейдите в папку src и последовательно выполните команды в терминале:
 
 Установка необходимых зависимостей
-- pip install -r requirements.txt
+- ```pip install -r requirements.txt```
 
 Загрузит и создаст образ python и FastAPI сервер
-- docker-compose -f docker-compose.yml build
+- ```docker-compose -f docker-compose.yml build```
 
 Загрузит и создаст образ PostgresSQL с готовой БД внутри
-- docker-compose -f docker-compose.db.yml build
+- ```docker-compose -f docker-compose.db.yml build```
 
 Запуск сервера
-- docker-compose -f docker-compose.yml up
+- ```docker-compose -f docker-compose.yml up```
 
-Далее перейдите по адресу http://127.0.0.1:8000/ в своем браузере.
+Далее перейдите по адресу ```http://127.0.0.1:8000/``` в своем браузере.
 Всё готово, можно работать. Для остановки сервера нажмите ctrl+c в терминале.
 
 Нажмите кнопку "New database" и дождитесь создания контейнера с БД(15 секунд), после загрузки вы должны увидеть в окне вывода результатов текст - "Новая база данных успешно создана".
