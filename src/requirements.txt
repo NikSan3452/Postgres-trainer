@@ -1,19 +1,17 @@
-fastapi
+fastapi==0.88.0
 
-uvicorn
+uvicorn==0.20.0
 
-pydantic
+pydantic==1.10.2
 
-pytest
+pytest==7.2.0
 
-python-dotenv
+jinja2==3.1.2
 
-jinja2
+docker==6.0.1
 
-docker
+itsdangerous==2.1.2
 
-itsdangerous
+sqlalchemy[asyncio]==1.4.45
 
-sqlalchemy[asyncio]
-
-asyncpg
+asyncpg==0.27.0
