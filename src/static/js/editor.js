@@ -86,3 +86,25 @@ function submit_delete() {
             console.error(error);
         });
 }
+
+
+document.querySelector('button').addEventListener('click', function (event) {
+    var classes = event.target.classList;
+    var text = event.target.textContent;
+    if (classes.contains('loading') || classes.contains('success')) {
+      return;
+    }
+    
+    classes.add('loading');
+    
+    setTimeout(function () {
+      classes.remove('loading');
+      classes.add('success');
+      event.target.textContent = 'Success!';
+      
+      setTimeout(function () {
+        classes.remove('success');
+        event.target.textContent = text;
+      }, 2500);
+    }, 15000);
+  });
