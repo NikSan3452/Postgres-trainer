@@ -14,6 +14,7 @@
 ```git clone https://github.com/NikSan3452/Postgres-trainer.git```
 
 Перейдите в папку src и последовательно выполните команды в терминале:
+
 Установка необходимых зависимостей
 - ```pip install -r requirements.txt```
 
