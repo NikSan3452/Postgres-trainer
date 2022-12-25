@@ -25,12 +25,7 @@ table, th, td {
 }
 
 th {
-    
     color: rgb(158, 219, 96);
-}
-
-tr {
-    max-height: 20px;
 }
 
 .main {
@@ -41,9 +36,9 @@ tr {
 
 .sql-schemas {
     height: 95vh;
-    width: 50%;
+    width: 35%;
     display: flex;
-    flex: 1 1 auto;
+    flex: 1 0 auto;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 5px 5px rgb(146, 171, 207);
@@ -57,9 +52,9 @@ iframe {
 
 .sql-trainer {
     height: 95vh;
-    width: 50%;
+    width: 45%;
     display: flex;
-    flex: 1 1 auto;
+    flex: 1 0 auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -134,6 +129,15 @@ iframe {
     border-radius: 10px;
     margin: 10px;
     font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s all;
+}
+
+.run-button:active, .delete-button:active, .new-database:active {
+    transform: scale(0.90);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+
 }
 
 .run-button {

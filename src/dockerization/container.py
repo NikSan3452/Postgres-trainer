@@ -54,7 +54,7 @@ class ContainerCrud:
                 ports={"5432/tcp": self.container_port},
                 publish_all_ports=True,
             )
-
+            print(container)
             # Сразу же запускаем контейнер
             container.start()
             return container.name

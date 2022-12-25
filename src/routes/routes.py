@@ -4,7 +4,7 @@ from fastapi import status, APIRouter
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.requests import Request
 
-import exceptions as exc
+import exceptions.exceptions as exc
 from core.config import tmp, Settings
 from dockerization.container import crud
 from db.db import db
@@ -140,10 +140,11 @@ def create(request: Request) -> Optional[JSONResponse]:
             container_name = crud.create_container()
             # Кодируем имя контейнера + url БД
             encoded_container = crud.encode_token(obj=container_name)
+            print(container_name)
 
             # Ждем пока создается база данных
-            time.sleep(5)
-            
+            time.sleep(15)
+
             # Устанавливаем cookie с токеном клиенту
             response.set_cookie(
                 key="trainer",
@@ -151,7 +152,7 @@ def create(request: Request) -> Optional[JSONResponse]:
                 expires=Settings.COOKIE_EXPIRATION,
                 httponly=True,
                 samesite="lax",
-            )
+            ) 
             return response
         except Exception as exc:
             return f"{exc} Неудалось создать базу данных"
