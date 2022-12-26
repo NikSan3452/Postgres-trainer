@@ -1,17 +1,18 @@
 import time
 from typing import Optional
-from fastapi import status, APIRouter
+from fastapi import status, APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.requests import Request
+from fastapi.templating import Jinja2Templates
 
 import exceptions.exceptions as exc
-from core.config import tmp, Settings
+from core.config import Settings
 from dockerization.container import crud
-from db.db import db
+from db.db import DbConnection
 
 
 router = APIRouter()
-
+tmp = Jinja2Templates(directory="templates")
+db = DbConnection()
 
 @router.get("/", response_class=HTMLResponse)
 async def main(request: Request) -> HTMLResponse:
@@ -27,7 +28,7 @@ async def main(request: Request) -> HTMLResponse:
 
 
 @router.post("/run", response_class=HTMLResponse)
-async def main(request: Request) -> HTMLResponse:
+async def run(request: Request) -> HTMLResponse:
     """Отвечает за обработку запросов к базе данных.
     Функция получает токен из cookie, декодирует его
     и получает url БД, к которой необходимо подключиться.
@@ -54,12 +55,14 @@ async def main(request: Request) -> HTMLResponse:
     decoded_token = crud.decode_token(token=cookie_exists)
     # Извлекаем url базы данных
     db_url = decoded_token.split(":::")[1]
+    # Создаем подключение к БД
+    await db.create_connection(db_url=db_url)
 
     # Получем тело запроса
     json = await request.json()
     # Извлекаем строку sql - запроса
-    query = json.get("data")
-    query = query.lower()
+    json_query = json.get("query")
+    query = json_query.lower()
 
     error = None
     msg = None
@@ -73,7 +76,7 @@ async def main(request: Request) -> HTMLResponse:
         and "delete" not in query
     ):  
         # Вызываем функцию отвечающую за select запросы
-        result = await db.run_select_queries(query=query, db_url=db_url)
+        result = await db.run_select_queries(query=query)
         if "Ошибка" in result:
             error = result
 
@@ -95,7 +98,7 @@ async def main(request: Request) -> HTMLResponse:
     # Если тип запроса отличный от select
     if "create" in query or "insert" in query or "update" in query or "delete" in query:
         # Вызываем функцию отвечающую за соотвествующие запросы
-        result = await db.get_other_queries(query=query, db_url=db_url)
+        result = await db.get_other_queries(query=query)
         if "Ошибка" in result:
             error = result
         if result == "Выполнено":

@@ -32,7 +32,6 @@ executeCodeBtn.addEventListener("click", () => {
 
 editorLib.init();
 
-
 // Выполнить sql - запрос
 function submit_run(value) {
     fetch("/run", {
@@ -41,47 +40,7 @@ function submit_run(value) {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: value }),
-    })  
-        .then((resp) => resp.text()) 
-        .then((data) => {
-            document.getElementById("responseArea").innerHTML = data;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-}
-
-
-// Создать новую базу данных
-function submit_new_database() {
-    fetch("/new-database", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: 'create' }),
-    })  
-        .then((resp) => resp.text())
-        .then((data) => {
-            document.getElementById("responseArea").innerHTML = data;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-}
-
-
-// Удалить базу данных
-function submit_delete() {
-    fetch("/delete", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: 'delete' }),
+        body: JSON.stringify({ query: value }),
     })
         .then((resp) => resp.text())
         .then((data) => {
@@ -92,25 +51,62 @@ function submit_delete() {
         });
 }
 
+// Создать новую базу данных
+function submit_new_database() {
+    fetch("/new-database", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: "create" }),
+    })
+        .then((resp) => resp.text())
+        .then((data) => {
+            document.getElementById("responseArea").innerHTML = data;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
 
-// Анимация кнопки создания БД 
-document.querySelector('button').addEventListener('click', function (event) {
+// Удалить базу данных
+function submit_delete() {
+    fetch("/delete", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: "delete" }),
+    })
+        .then((resp) => resp.text())
+        .then((data) => {
+            document.getElementById("responseArea").innerHTML = data;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+// Анимация кнопки создания БД
+document.querySelector("button").addEventListener("click", function (event) {
     var classes = event.target.classList;
     var text = event.target.textContent;
-    if (classes.contains('loading') || classes.contains('success')) {
-      return;
+    if (classes.contains("loading") || classes.contains("success")) {
+        return;
     }
-    
-    classes.add('loading');
-    
+
+    classes.add("loading");
+
     setTimeout(function () {
-      classes.remove('loading');
-      classes.add('success');
-      event.target.textContent = 'Success!';
-      
-      setTimeout(function () {
-        classes.remove('success');
-        event.target.textContent = text;
-      }, 2500);
+        classes.remove("loading");
+        classes.add("success");
+        event.target.textContent = "Success!";
+
+        setTimeout(function () {
+            classes.remove("success");
+            event.target.textContent = text;
+        }, 2500);
     }, 15000);
-  });
+});

@@ -1,7 +1,7 @@
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, Request, HTTPException, status
 
-from core.config import tmp
+from routes.routes import tmp
 
 exc_app = FastAPI()
 
