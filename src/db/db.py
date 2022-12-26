@@ -44,7 +44,7 @@ class DbConnection:
             query (str): Запрос
 
         Returns:
-            Optional[None]: None
+            Optional[str]: None
         """
         try:
             async with self.engine.connect() as conn:
