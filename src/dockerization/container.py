@@ -78,7 +78,8 @@ class ContainerCrud:
     def remove_all_containers(self):
         try:
             for container in client.containers.list():
-                container.remove()
+                container.stop()
+                container.remove() 
         except Exception as exc:
             return f"Ошибка: {exc} Не удалось остановить контейнер"
 
@@ -114,7 +115,7 @@ class ContainerCrud:
             secrets.choice(string.ascii_letters) for _ in range(8)
         )
         self.postgres_password = "".join(
-            secrets.choice(string.ascii_letters + string.digits) for i in range(12)
+            secrets.choice(string.ascii_letters + string.digits) for _ in range(12)
         )
         self.postgres_server = self.container_name
         self.postgres_port = 5432
