@@ -45,7 +45,7 @@
                         <div class="editor">
                             <div class="" id="editor"></div>
                         </div>
-                    
+
                         <div class="editor-buttons">
                             <button
                                 class="new-database"
@@ -67,6 +67,17 @@
                     </div>
                 </section>
             </main>
+            <footer class="footer">
+                <div class="github">
+                    <a
+                        href="https://github.com/NikSan3452/Postgres-trainer"
+                        class="github-link"
+                        ><img
+                            src="{{url_for('static', path='/img/github-mark.svg')}}"
+                            alt="github" height="20px"
+                    /></a>
+                </div>
+            </footer>
         </div>
         <script src="{{url_for('static', path='/js/ace_editor/src-min/ace.js')}}"></script>
         <script src="{{url_for('static', path='/js/ace_editor/src-min/mode-pgsql.js')}}"></script>

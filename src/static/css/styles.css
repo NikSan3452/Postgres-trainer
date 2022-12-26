@@ -213,3 +213,11 @@ to {
     padding: 10px;
     height: 100%;
 }
+
+.footer {
+    text-align: center;
+}
+
+.github-link {
+    filter: invert(87%) sepia(99%) saturate(3079%) hue-rotate(106deg) brightness(102%) contrast(104%);
+}
