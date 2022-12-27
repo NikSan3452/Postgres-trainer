@@ -36,7 +36,7 @@ class ContainerCrud:
         self.container_name = self.create_container_name()
         self.container_port = self.create_container_port()
         self.database_url = self.create_db_url()
-        
+
         try:
             container = client.containers.create(
                 image=Settings.DOCKER_IMAGE_NAME,
@@ -74,12 +74,12 @@ class ContainerCrud:
             container.stop()
         except Exception as exc:
             return f"Ошибка: {exc} Не удалось остановить контейнер"
-    
+
     def remove_all_containers(self):
         try:
             for container in client.containers.list():
                 container.stop()
-                container.remove() 
+                container.remove()
         except Exception as exc:
             return f"Ошибка: {exc} Не удалось остановить контейнер"
 

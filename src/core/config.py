@@ -1,6 +1,11 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Settings:
+
     # Секретный ключ. Заменить на надежный
-    SECRET_KEY: str = 'secret_key'
+    SECRET_KEY: str = "secret_key"
     # Время жизни токена
     TOKEN_EXPIRATION: int = 3600 * 24 * 30
     # Время жизни cookie
@@ -15,6 +20,4 @@ class Settings:
 
     # Можно посмотреть командой: docker network ls.
     # Точно также, как и параметр выше - должно совпадать с указанным здесь.
-    DOCKER_NETWORK: str = "postgres-trainer_default" 
-
- 
+    DOCKER_NETWORK: str = "postgres-trainer_default"
