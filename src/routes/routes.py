@@ -62,8 +62,9 @@ async def run(request: Request) -> HTMLResponse:
     # Получем тело запроса
     json = await request.json()
     # Извлекаем строку sql - запроса
-    json_query = json.get("query")
-    query = json_query.lower()
+    json_query = json.get("query", None)
+    if json_query:
+        query = json_query.lower()
 
     error = None
     msg = None
@@ -193,9 +194,9 @@ def delete(request: Request) -> Optional[JSONResponse]:
     # Декодируем токен
     decoded_token = crud.decode_token(token=cookie_exists)
     # Извлекаем имя контейнера
-    decoded_token = decoded_token.split(":::")[0]
+    container_name = decoded_token.split(":::")[0]
     # Удаляем контейнер
-    crud.remove_container(name=decoded_token)
+    crud.remove_container(name=container_name)
     # Удаляем cookie
     response.delete_cookie(key="trainer")
 

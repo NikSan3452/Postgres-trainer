@@ -21,3 +21,6 @@ class Settings:
     # Можно посмотреть командой: docker network ls.
     # Точно также, как и параметр выше - должно совпадать с указанным здесь.
     DOCKER_NETWORK: str = "postgres-trainer_default"
+
+    # Тестовый url
+    TEST_URL:str = "http://127.0.0.1:8000/"
