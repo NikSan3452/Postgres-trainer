@@ -14,8 +14,9 @@ router = APIRouter()
 tmp = Jinja2Templates(directory="templates")
 db = DbConnection()
 
+
 @router.get("/", response_class=HTMLResponse)
-async def main(request: Request) -> HTMLResponse:
+def main(request: Request) -> HTMLResponse:
     """Отвечает за отображение главной страницы
 
     Args:
@@ -43,7 +44,7 @@ async def run(request: Request) -> HTMLResponse:
     Returns:
         HTMLResponse: HTML - ответ
     """
-    
+
     # Получаем токен из cookie
     cookie_exists = request.cookies.get("trainer")
     if not cookie_exists:
@@ -74,7 +75,7 @@ async def run(request: Request) -> HTMLResponse:
         and "insert" not in query
         and "update" not in query
         and "delete" not in query
-    ):  
+    ):
         # Вызываем функцию отвечающую за select запросы
         result = await db.run_select_queries(query=query)
         if "Ошибка" in result:
@@ -129,36 +130,32 @@ def create(request: Request) -> Optional[JSONResponse]:
     Returns:
         Optional[JSONResponse]: JSON - ответ
     """
-    # Если cookie не существует
     cookie_exists = request.cookies.get("trainer")
+    # Если cookie не существует
     if not cookie_exists:
-        try:
-            # Формируем тело ответа
-            response = JSONResponse(
-                content="Новая база данных успешно создана",
-                status_code=status.HTTP_200_OK,
-            )
-        
-            # Создаем контейнер и получем его имя
-            container_name = crud.create_container()
-            # Кодируем имя контейнера + url БД
-            encoded_container = crud.encode_token(obj=container_name)
-            print(container_name)
+        # Формируем тело ответа
+        response = JSONResponse(
+            content="Новая база данных успешно создана",
+            status_code=status.HTTP_200_OK,
+        )
 
-            # Ждем пока создается база данных
-            time.sleep(15)
+        # Создаем контейнер и получем его имя
+        container_name = crud.create_container()
+        # Кодируем имя контейнера + url БД
+        encoded_container = crud.encode_token(obj=container_name)
 
-            # Устанавливаем cookie с токеном клиенту
-            response.set_cookie(
-                key="trainer",
-                value=encoded_container,
-                expires=Settings.COOKIE_EXPIRATION,
-                httponly=True,
-                samesite="lax",
-            ) 
-            return response
-        except Exception as exc:
-            return f"{exc} Неудалось создать базу данных"
+        # Ждем пока создается база данных
+        time.sleep(15)
+
+        # Устанавливаем cookie с токеном клиенту
+        response.set_cookie(
+            key="trainer",
+            value=encoded_container,
+            expires=Settings.COOKIE_EXPIRATION,
+            httponly=True,
+            samesite="lax",
+        )
+        return response
     else:
         return JSONResponse(
             content="База данных уже создана", status_code=status.HTTP_200_OK
@@ -188,19 +185,18 @@ def delete(request: Request) -> Optional[JSONResponse]:
         return JSONResponse(
             content="База данных не создана", status_code=status.HTTP_409_CONFLICT
         )
-    try:
-        # Формируем тело ответа
-        response = JSONResponse(
-            content="База данных удалена", status_code=status.HTTP_200_OK
-        )
-        # Декодируем токен
-        decoded_token = crud.decode_token(token=cookie_exists)
-        # Извлекаем имя контейнера
-        decoded_token = decoded_token.split(":::")[0]
-        # Удаляем контейнер
-        crud.remove_container(name=decoded_token)
-        # Удаляем cookie
-        response.delete_cookie(key="trainer")
-        return response
-    except Exception as exc:
-        return f"{exc} Неудалось удалить базу данных"
+
+    # Формируем тело ответа
+    response = JSONResponse(
+        content="База данных удалена", status_code=status.HTTP_200_OK
+    )
+    # Декодируем токен
+    decoded_token = crud.decode_token(token=cookie_exists)
+    # Извлекаем имя контейнера
+    decoded_token = decoded_token.split(":::")[0]
+    # Удаляем контейнер
+    crud.remove_container(name=decoded_token)
+    # Удаляем cookie
+    response.delete_cookie(key="trainer")
+
+    return response
