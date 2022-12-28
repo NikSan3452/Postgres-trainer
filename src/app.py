@@ -27,5 +27,4 @@ app.include_router(router)
 
 @app.on_event('shutdown') 
 def stop():
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     crud.remove_all_containers()
