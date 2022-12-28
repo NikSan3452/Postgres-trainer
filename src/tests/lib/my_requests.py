@@ -1,5 +1,5 @@
 import requests
-from core.config import Settings
+from src.core.config import Settings
 
 
 class MyRequests:
