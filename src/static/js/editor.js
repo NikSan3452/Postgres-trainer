@@ -2,7 +2,7 @@
 let executeCodeBtn = document.querySelector(".run-button");
 
 let codeEditor = ace.edit("editor");
-let defaultCode = "select * from employees;";
+let defaultCode = "";
 
 let editorLib = {
     init() {
