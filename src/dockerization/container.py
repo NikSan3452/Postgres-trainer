@@ -8,7 +8,6 @@ from typing import Optional
 from itsdangerous import URLSafeTimedSerializer
 from core.config import Settings
 
-
 client = docker.from_env()
 
 
@@ -16,16 +15,16 @@ class ContainerCrud:
     """Этот класс отвечает за создание и управление контейнерами docker"""
 
     def __init__(self) -> None:
-        self.container_name: str = None
-        self.container_port: int = None
+        self.container_name: Optional[str] = None
+        self.container_port: Optional[int] = None
         self.container_port_list: list[int] = []
 
-        self.postgres_user: str = None
-        self.postgres_password: str = None
-        self.postgres_server: str = None
-        self.postgres_port: int = None
-        self.postgres_db: str = None
-        self.database_url: str = None
+        self.postgres_user: Optional[str] = None
+        self.postgres_password: Optional[str] = None
+        self.postgres_server: Optional[str] = None
+        self.postgres_port: Optional[int] = None
+        self.postgres_db: Optional[str] = None
+        self.database_url: Optional[str] = None
 
     def create_container(self) -> Optional[str]:
         """Отвечает за создание контейнера Docker

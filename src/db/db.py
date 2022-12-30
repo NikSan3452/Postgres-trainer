@@ -33,6 +33,7 @@ class DbConnection:
                 result = await conn.execute(text(query))
                 tuple_result = [tuple(row) for row in result]
                 headers = result.keys()
+                print(tuple_result)
                 return headers, tuple_result
         except Exception as exc:
             return f"Ошибка: {exc}"

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Settings:
-
+    PROJECT_NAME = 'Postgres-Trainer'
     # Секретный ключ. Заменить на надежный
     SECRET_KEY: str = "secret_key"
     # Время жизни токена

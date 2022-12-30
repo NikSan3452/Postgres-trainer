@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 
 from core.config import Settings
+from core.keywords import check_string
 from dockerization.container import crud
 from db.db import DbConnection
 
@@ -28,7 +29,7 @@ def main(request: Request) -> HTMLResponse:
 
 
 @router.post("/run", response_class=HTMLResponse)
-async def run(request: Request) -> HTMLResponse:
+async def run(request: Request) -> Optional[HTMLResponse | JSONResponse]:
     """Отвечает за обработку запросов к базе данных.
     Функция получает токен из cookie, декодирует его
     и получает url БД, к которой необходимо подключиться.
@@ -43,7 +44,6 @@ async def run(request: Request) -> HTMLResponse:
     Returns:
         HTMLResponse: HTML - ответ
     """
-
     # Получаем токен из cookie
     cookie_exists = request.cookies.get("trainer")
     if not cookie_exists:
@@ -61,9 +61,8 @@ async def run(request: Request) -> HTMLResponse:
     # Получем тело запроса
     json = await request.json()
     # Извлекаем строку sql - запроса
-    json_query = json.get("query", None)
-    if json_query:
-        query = json_query.lower()
+    query_from_json = json.get("query", None)
+    query = check_string(query_from_json)
 
     error = None
     msg = None

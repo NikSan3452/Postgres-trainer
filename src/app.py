@@ -5,6 +5,7 @@ from exceptions import exceptions as exc
 
 from routes.routes import router
 from dockerization.container import crud
+from core.config import Settings
 
 exception_handlers = {
     404: exc.not_found_error,
@@ -12,7 +13,7 @@ exception_handlers = {
 }
 
 
-app = FastAPI(exception_handlers=exception_handlers)
+app = FastAPI(exception_handlers=exception_handlers, title=Settings.PROJECT_NAME)
 
 app.mount(
     "/static",
@@ -26,5 +27,5 @@ app.include_router(router)
 
 
 @app.on_event('shutdown') 
-def stop():
+def stop() -> None:
     crud.remove_all_containers()
