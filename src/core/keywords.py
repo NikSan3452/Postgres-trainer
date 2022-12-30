@@ -824,6 +824,7 @@ keywords = [
 
 
 def check_string(string: str) -> str:
+    new_string = string
     for word in keywords:
         if word in string:
             new_string = string.replace(word, word.lower(), 10)
