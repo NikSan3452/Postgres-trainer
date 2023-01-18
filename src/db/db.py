@@ -54,5 +54,3 @@ class DbConnection:
                 return "Выполнено"
         except Exception as exc:
             return f"Ошибка: {exc}"
-
-

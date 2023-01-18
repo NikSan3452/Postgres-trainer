@@ -3,9 +3,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from exceptions import exceptions as exc
 
-from routes.routes import router
+from endpoints.endpoints import router
 from dockerization.container import crud
-from core.config import Settings
+from config.config import Settings
 
 exception_handlers = {
     404: exc.not_found_error,

@@ -4,8 +4,8 @@ from fastapi import status, APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 
-from core.config import Settings
-from core.keywords import check_string
+from config.config import Settings
+from config.keywords import check_string
 from dockerization.container import crud
 from db.db import DbConnection
 

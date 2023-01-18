@@ -6,7 +6,7 @@ import random
 
 from typing import Optional
 from itsdangerous import URLSafeTimedSerializer
-from core.config import Settings
+from config.config import Settings
 
 client = docker.from_env()
 
